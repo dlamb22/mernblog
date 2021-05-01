@@ -1,4 +1,4 @@
-# Mern Blog
+# MERN Blog
 
 This is a fully functional blog that was built using the MERN stack.
 
