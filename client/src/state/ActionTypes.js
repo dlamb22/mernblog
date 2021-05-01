@@ -1,0 +1,7 @@
+export const GET_ARTICLES = 'GET_ARTICLES';
+export const GET_ARTICLE = 'GET_ARTICLE';
+export const NEW_ARTICLE = 'NEW_ARTICLE';
+export const EDIT_ARTICLE = 'EDIT_ARTICLE';
+export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+export const ARTICLES_ERROR = 'ARTICLES_ERROR';
+export const GET_ARTICLES_BY_TAG = 'GET_ARTICLES_BY_TAG';
