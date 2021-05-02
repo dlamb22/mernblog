@@ -59,6 +59,7 @@ const Navbar = () => {
               aria-label='Search'
               value={searchText}
               onChange={(e) => setSearchText(e.target.value)}
+              required
             />
             <button className='btn btn-secondary' type='submit'>
               Search
