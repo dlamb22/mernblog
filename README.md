@@ -28,7 +28,7 @@ Once it has finished installing all of the packages you need to create a .env fi
 ```bash
 NODE_ENV=development
 PORT=5000
-MONGO_DB=mongodb_url_connection
+MONGO_DB=mongoDB_connection_string
 ```
 Now, run this command in the server directory:
 
