@@ -22,7 +22,15 @@ npm install
 
 ## Usage
 
-Once it has finished installing all of the packages, run this command in the server directory:
+Once it has finished installing all of the packages you need to create a .env file inside of the server/config directory:
+
+.env
+```bash
+NODE_ENV=development
+PORT=5000
+MONGO_DB=mongodb_url_connection
+```
+Now, run this command in the server directory:
 
 ```bash
 npm run dev
