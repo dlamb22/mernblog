@@ -14,9 +14,9 @@ Using npm:
 
 ```bash
 git clone https://github.com/dlamb22/mernblog.git
-cd mernblog
+cd mernblog/server
 npm install
-cd client
+cd ../client
 npm install
 ```
 
