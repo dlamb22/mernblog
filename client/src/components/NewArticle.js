@@ -11,7 +11,8 @@ const NewArticle = () => {
     loading: true,
   };
 
-  const [dispatch] = useReducer(Reducer, initialState);
+  // eslint-disable-next-line no-unused-vars
+  const [state, dispatch] = useReducer(Reducer, initialState);
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
   const [articleImg, setArticleImg] = useState('');
@@ -45,9 +46,9 @@ const NewArticle = () => {
       article.append('articleImg', articleImg);
       article.append('tags', tags);
 
-      history.push('/');
-
       await newArticle(dispatch, article);
+
+      history.push('/');
     } catch (err) {
       console.log('new article error', err);
     }

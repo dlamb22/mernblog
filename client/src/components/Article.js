@@ -63,7 +63,7 @@ const Article = (props) => {
         <img
           src={articleImg.secure_url}
           alt='Article Img'
-          style={{ width: '100%', height: '350px' }}
+          style={{ width: '100%', height: '500px' }}
         />
         <p className='card-text my-5' dangerouslySetInnerHTML={body} />
         <div className='card-text d-flex justify-content-end align-items-end'>

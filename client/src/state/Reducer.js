@@ -24,7 +24,7 @@ const Reducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        articles: [action.payload.data, ...state.articles],
+        articles: [action.payload, ...state.articles],
       };
     case actionTypes.EDIT_ARTICLE:
       return {

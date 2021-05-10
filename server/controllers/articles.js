@@ -86,9 +86,9 @@ exports.newArticle = async (req, res) => {
 
     const file = req.files.articleImg;
 
-    const img = `${Math.random()
-      .toString(36)
-      .substr(2, 11)}${file.name.trim().replace(/\.[^/.]+$/, '')}`;
+    const img = `${Math.random().toString(36).substr(2, 11)}${file.name
+      .trim()
+      .replace(/\.[^/.]+$/, '')}`;
 
     cloudinary.config({
       cloud_name: process.env.CLOUD_NAME,
@@ -102,7 +102,14 @@ exports.newArticle = async (req, res) => {
       public_id: img,
     });
 
-    removeTmp(file.tempFilePath);
+    fs.unlink(`${file.tempFilePath}`, (err) => {
+      if (err) {
+        return res.status(500).json({
+          success: false,
+          error: 'Image not deleted',
+        });
+      }
+    });
 
     const articleImg = {
       public_id: uploadResult.public_id,
@@ -258,10 +265,4 @@ exports.deleteArticle = async (req, res) => {
       error: 'No Article Found',
     });
   }
-};
-
-const removeTmp = (path) => {
-  fs.unlink(path, (err) => {
-    if (err) throw err;
-  });
 };
