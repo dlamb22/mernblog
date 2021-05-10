@@ -47,6 +47,7 @@ const NewArticle = () => {
       article.append('tags', tags);
 
       await newArticle(dispatch, article);
+
       history.push('/');
     } catch (err) {
       console.log('new article error', err);
