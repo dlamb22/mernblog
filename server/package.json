@@ -10,7 +10,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
-  "author": "dlamb22",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "cloudinary": "^1.25.1",
