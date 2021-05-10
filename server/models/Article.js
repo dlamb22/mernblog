@@ -25,8 +25,14 @@ const ArticleSchema = new mongoose.Schema(
       required: true,
     },
     articleImg: {
-      type: String,
-      required: true,
+      public_id: {
+        type: String,
+        required: true,
+      },
+      secure_url: {
+        type: String,
+        required: true,
+      },
     },
     tags: {
       type: Array,

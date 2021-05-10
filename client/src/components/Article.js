@@ -61,7 +61,7 @@ const Article = (props) => {
           ))}
         </h6>
         <img
-          src={articleImg}
+          src={articleImg.secure_url}
           alt='Article Img'
           style={{ width: '100%', height: '350px' }}
         />

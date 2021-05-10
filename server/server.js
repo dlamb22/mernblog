@@ -22,7 +22,7 @@ app.listen(PORT, () =>
 
 // Routes
 // access to express-fileupload
-app.use(fileUpload());
+app.use(fileUpload({ useTempFiles: true }));
 // access parameters inside of the article form
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

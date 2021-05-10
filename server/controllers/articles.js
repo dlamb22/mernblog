@@ -6,6 +6,7 @@ const createDomPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 const dompurify = createDomPurify(new JSDOM().window);
 const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
 
 // @desc  Get all articles
 // @route GET /api/articles
@@ -87,18 +88,26 @@ exports.newArticle = async (req, res) => {
 
     const img = `${Math.random()
       .toString(36)
-      .substr(2, 11)}${file.name.trim()}`;
+      .substr(2, 11)}${file.name.trim().replace(/\.[^/.]+$/, '')}`;
 
-    file.mv(`${__dirname}/../../client/public/uploads/${img}`, (err) => {
-      if (err) {
-        return res.status(500).json({
-          success: false,
-          error: 'Image not saved',
-        });
-      }
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.CLOUD_API_KEY,
+      api_secret: process.env.CLOUD_API_SECRET,
     });
 
-    const articleImg = `/uploads/${img}`;
+    const uploadResult = await cloudinary.uploader.upload(file.tempFilePath, {
+      secure: true,
+      folder: 'uploads',
+      public_id: img,
+    });
+
+    removeTmp(file.tempFilePath);
+
+    const articleImg = {
+      public_id: uploadResult.public_id,
+      secure_url: uploadResult.secure_url,
+    };
 
     const { title, body, tags } = req.body;
 
@@ -225,23 +234,23 @@ exports.deleteArticle = async (req, res) => {
   try {
     const article = await Article.findById(req.params.id);
 
+    const public_id = article.articleImg.public_id;
+
     await article.remove();
 
-    fs.unlink(
-      `${__dirname}/../../client/public${article.articleImg}`,
-      (err) => {
-        if (err) {
-          return res.status(500).json({
-            success: false,
-            error: 'Image not deleted',
-          });
-        }
-      }
-    );
+    cloudinary.config({
+      cloud_name: process.env.CLOUD_NAME,
+      api_key: process.env.CLOUD_API_KEY,
+      api_secret: process.env.CLOUD_API_SECRET,
+    });
+
+    await cloudinary.uploader.destroy(public_id, (err, result) => {
+      if (err) throw err;
+    });
 
     return res.status(200).json({
       success: true,
-      data: {},
+      data: 'Article has been removed',
     });
   } catch (err) {
     return res.status(500).json({
@@ -249,4 +258,10 @@ exports.deleteArticle = async (req, res) => {
       error: 'No Article Found',
     });
   }
+};
+
+const removeTmp = (path) => {
+  fs.unlink(path, (err) => {
+    if (err) throw err;
+  });
 };

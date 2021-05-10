@@ -12,7 +12,7 @@ const ArticleListItem = ({ article }) => {
       <div className='row g-0'>
         <div className='col-md-4'>
           <img
-            src={articleImg}
+            src={articleImg.secure_url}
             alt='Article Img'
             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
           />
