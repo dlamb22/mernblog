@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const fileUpload = require('express-fileupload');
@@ -21,6 +22,8 @@ app.listen(PORT, () =>
 );
 
 // Routes
+//Cors Middleware
+app.use(cors());
 // access to express-fileupload
 app.use(fileUpload({ useTempFiles: true }));
 // access parameters inside of the article form
