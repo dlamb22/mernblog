@@ -4,7 +4,7 @@ import Reducer from '../state/Reducer';
 import { getArticles } from '../state/Actions';
 
 const initialState = {
-  loading: false,
+  loading: true,
   articles: [],
   article: {},
   pagination: [],
